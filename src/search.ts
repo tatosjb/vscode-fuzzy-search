@@ -8,15 +8,17 @@ interface DataResultCallback {
 }
 
 function getOsPath(): String {
+  const extensionPath = vscode.extensions.getExtension('tatosjb.fuzzy-search')?.extensionPath;
+
   switch (process.platform) {
     case 'darwin':
-      return './src/binaries/darwin';
+      return `${extensionPath}/binaries/darwin`;
     case 'win32':
-      return './src/binaries/windows';
+      return `${extensionPath}/binaries/windows`;
     case 'linux':
-      return './src/binaries/linux';
+      return `${extensionPath}/binaries/linux`;
     default:
-      return './src/binaries/linux';
+      return `${extensionPath}/binaries/linux`;
   }
 };
 
