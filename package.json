@@ -1,6 +1,6 @@
 {
 	"name": "fuzzy-search",
-	"displayName": "fuzzy-search",
+	"displayName": "Fuzzy search",
 	"description": "Change the default search for fzf",
 	"version": "0.0.1",
 	"engines": {
