@@ -18,7 +18,6 @@ function getOsPath(): String {
     default:
       return './src/binaries/linux';
   }
-  return '';
 };
 
 function getFdPath(): string {
