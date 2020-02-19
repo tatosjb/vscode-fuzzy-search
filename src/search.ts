@@ -29,7 +29,9 @@ function getFzfPath(): string {
 };
 
 function buildSearch(fd: string, fzf: string, text: string): string {
-  return text ? `${fd} --type f . '${vscode.workspace.rootPath || ''}' | ${fzf} -m -f '${text}'\n` : '';
+  const path = vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders[0].uri.path;
+
+  return text ? `${fd} --type f . '${path || ''}' | ${fzf} -m -f '${text}'\n` : '';
 }
 
 export default class Search {
@@ -51,6 +53,7 @@ export default class Search {
   }
 
   private onResultData(data: string) {
+    const workspacePath = vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders[0].uri.path;
     this.fileNames = this.fileNames
       .concat(data.toString()
           .split('\n')
@@ -58,7 +61,7 @@ export default class Search {
             .map((filePath) => {
               return {
                 label: `${path.parse(filePath).dir.replace(/.*(\/|\\)/, '')}/${path.parse(filePath).name}`,
-                description: `${this.searchString} - ${path.parse(filePath).dir.replace(vscode.workspace.rootPath || '', '')}`,
+                description: `${this.searchString} - ${path.parse(filePath).dir.replace(workspacePath || '', '')}`,
                 awaysShow: true,
                 uri: vscode.Uri.file(filePath)
               };
