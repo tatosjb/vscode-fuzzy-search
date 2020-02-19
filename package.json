@@ -1,7 +1,8 @@
 {
 	"name": "fuzzy-search",
 	"displayName": "Fuzzy search",
-	"description": "Change the default search for fzf",
+  "description": "Change the default search for fzf",
+  "publisher": "tatosjb",
 	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.42.0"
