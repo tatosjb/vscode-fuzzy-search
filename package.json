@@ -2,7 +2,7 @@
 	"name": "fuzzy-search",
 	"displayName": "Fuzzy search",
 	"description": "Change the default search for fzf",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.42.0"
 	},
