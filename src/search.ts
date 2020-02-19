@@ -28,8 +28,8 @@ function getFzfPath(): string {
   return process.platform === 'win32' ? `${getOsPath()}/fzf.exe` : `${getOsPath()}/fzf`;
 };
 
-function buildSearch(fd: string, fzf: string, rootPath: string, text: string): string {
-  return text ? `${fd} --type f . '${rootPath}' | ${fzf} -m -f '${text}'\n` : '';
+function buildSearch(fd: string, fzf: string, text: string): string {
+  return text ? `${fd} --type f . '${vscode.workspace.rootPath || ''}' | ${fzf} -m -f '${text}'\n` : '';
 }
 
 export default class Search {
@@ -38,13 +38,11 @@ export default class Search {
   private fdPath = getFdPath();
   private onDataListeners: DataResultCallback[];
   private fileNames: Item[];
-  private rootPath: string;
   private searchString: string;
 
   constructor(){
     this.onDataListeners = [];
     this.fileNames = [];
-    this.rootPath = vscode.workspace.rootPath || '';
     this.searchString = '';
 
     this.onResultData = this.onResultData.bind(this);
@@ -57,10 +55,10 @@ export default class Search {
       .concat(data.toString()
           .split('\n')
             .filter(filePath => filePath.trim() !== '')
-            .map((filePath, index) => {
+            .map((filePath) => {
               return {
                 label: `${path.parse(filePath).dir.replace(/.*(\/|\\)/, '')}/${path.parse(filePath).name}`,
-                description: `${this.searchString} - ${path.parse(filePath).dir.replace(this.rootPath, '')}`,
+                description: `${this.searchString} - ${path.parse(filePath).dir.replace(vscode.workspace.rootPath || '', '')}`,
                 awaysShow: true,
                 uri: vscode.Uri.file(filePath)
               };
@@ -76,7 +74,7 @@ export default class Search {
 
   search(text: string): void {
     this.fileNames = [];
-    const command = buildSearch(this.fdPath, this.fzfPath, this.rootPath, text);
+    const command = buildSearch(this.fdPath, this.fzfPath, text);
     this.searchString = text;
 
     this.sh.stdin.write(Buffer.from(command));
