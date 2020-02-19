@@ -2,4 +2,4 @@
 
 It uses **fzf** to search for files
 
-PS: Only tested on ios scenario, if you have any issues, please report
+PS: Only tested on osx and ubuntu scenario, if you have any issues, please report
