@@ -3,10 +3,10 @@
 	"displayName": "Fuzzy search",
 	"description": "Change the default search for fzf",
 	"publisher": "tatosjb",
-  "version": "1.1.1",
-  "repository": {
-    "url": "https://github.com/tatosjb/vscode-fuzzy-search"
-  },
+	"version": "1.1.2",
+	"repository": {
+		"url": "https://github.com/tatosjb/vscode-fuzzy-search"
+	},
 	"engines": {
 		"vscode": "^1.42.0"
 	},
