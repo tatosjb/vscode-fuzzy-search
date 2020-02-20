@@ -62,7 +62,7 @@ export default class Search {
             .filter(filePath => filePath.trim() !== '')
             .map((filePath) => {
               return {
-                label: `${path.parse(filePath).dir.replace(/.*(\/|\\)/, '')}/${path.parse(filePath).name}`,
+                label: `${path.parse(filePath).dir.replace(/.*(\/|\\)/, '')}/${path.parse(filePath).base}`,
                 description: `${this.searchString} - ${path.parse(filePath).dir.replace(workspacePath || '', '')}`,
                 awaysShow: true,
                 uri: vscode.Uri.file(filePath)
