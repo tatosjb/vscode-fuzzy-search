@@ -79,7 +79,7 @@ export default class Search {
 
   search(text: string): void {
     this.fileNames = [];
-    const command = buildSearch(this.fdPath, this.fzfPath, text);
+    const command = buildSearch(this.fdPath, this.fzfPath, text.toLowerCase());
     this.searchString = text;
 
     this.sh.stdin.write(Buffer.from(command));
